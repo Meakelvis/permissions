@@ -22,12 +22,6 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $userRole = User::where('email', $request->email)->first()->role_id;
-
-        if ($userRole == Role::IS_ORG || $userRole == Role::IS_GENERAL) {
-            return back()->with('error', 'Temporarily blocked because the lockdown period has ended');
-        }
-
         if (!auth()->attempt($request->only('email', 'password'))) {
             return back()->with('error', 'Invalid login details');
         }

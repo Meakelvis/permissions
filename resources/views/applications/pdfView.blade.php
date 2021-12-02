@@ -223,7 +223,7 @@
                         <br> MINISTRY OF WORKS AND TRANSPORT</strong></p>
                 </div>
                 <div class="qrcode">
-                    <img src="application:image/png;base64, {!! base64_encode(QrCode::format('png')->errorCorrection('H')->size(100)->generate(Request::url())) !!}" />
+                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate(Request::url())) !!} ">
                 </div>
             </div>
             <br>

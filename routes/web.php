@@ -159,22 +159,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/category/clearingAgents', [OrgCategoriesController::class, 'clearingAgents'])->name('clearingAgents');
     Route::get('/category/educationServices', [OrgCategoriesController::class, 'educationServices'])->name('educationServices');
     Route::get('/category/ngos', [OrgCategoriesController::class, 'ngos'])->name('ngos');
-
-
-    /**
-     * pdf routes
-     */
-    // cross-district travel pdf
-    Route::get('/results-pdf/applications/{application}', [ApplicationsController::class, 'generatePDF'])->name('applications.pdf');
-
-    // organisations pdf
-    Route::get('/results-pdf/{person}', [OrganisationsController::class, 'generatePDF'])->name('pdf');
 });
 
-// data/special clearances routes
-// Route::get('/results-pdf/special/{data}', [DataController::class, 'generatePDF'])->name('data.pdf');
+/**
+ * pdf routes
+ */
+// cross-district travel pdf
+Route::get('/results-pdf/applications/{application}', [ApplicationsController::class, 'generatePDF'])->name('applications.pdf');
 
-
-
-// mda
-// Route::get('/results-pdf/personnel/{data}', [MdasController::class, 'generatePDF'])->name('mda.pdf');
+// organisations pdf
+Route::get('/results-pdf/{person}', [OrganisationsController::class, 'generatePDF'])->name('pdf');
