@@ -14,6 +14,9 @@ use DateTime;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrganisationCreated;
+
 
 class OrganisationsController extends Controller
 {
@@ -62,7 +65,7 @@ class OrganisationsController extends Controller
                     'password' => Hash::make($password),
                 ]);
 
-                User::create([
+                $user = User::create([
                     'name' => $request->name_of_applicant,
                     'role_id' => Role::IS_ORG,
                     'email' => $request->email,
@@ -70,10 +73,12 @@ class OrganisationsController extends Controller
                     'password' => Hash::make($password),
                 ]);
 
+                Mail::to($request->email)->send(new OrganisationCreated($user, $password));
+
 
                 // $organisation = Organisation::orderBy('created_at', 'desc')->first();
 
-                return redirect()->route('org.dashboard')->with('success', 'Organisation Added, password is ' . $password . '');
+                return redirect()->route('org.dashboard')->with('success', 'Organisation Created Successfully');
             }
         }
     }
